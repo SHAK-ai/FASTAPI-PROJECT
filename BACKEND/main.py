@@ -34,20 +34,20 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=False,
-    allow_methods=["*"],
+    allow_methods=["POST"],
     allow_headers=["*"],
 )
 
-@app.middleware("http")
-async def api_authentication_key(request: Request, call_next):
-    
-
-
+app.middleware("http")(api_authenticate_key)
 app.include_router(
     ai_agent_router,
     tags=["AI Module"]
 )
 
+
+
 @app.get("/", status_code=200)
 async def root():
-    return FileResponse(FRONTEND_DIR / "index.html")
+    return {
+        "message": "YOURE AT THE XANDER'S BACKEND"
+    }
