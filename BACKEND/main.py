@@ -18,8 +18,10 @@ app = FastAPI()
 
 
 
-FRONTEND_DIR = Path(__file__).parent / "frontend"
+FRONTEND_DIR = Path(__file__).resolve().parent.parent / "FRONTEND"
+
 app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
+
 
 origins = [
    "https://example.org",
@@ -35,6 +37,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.middleware("http")
+async def api_authentication_key(request: Request, call_next):
+    
 
 
 app.include_router(
