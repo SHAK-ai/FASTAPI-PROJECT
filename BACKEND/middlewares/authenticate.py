@@ -9,7 +9,7 @@ async def api_authenticate_key(request: Request, call_next):
 
     API_KEY = request.headers.get("X-API-KEY", "")
     OUR_API_KEY = os.getenv("AUTHENTICATED_KEY", "")
-
+    
     if not secrets.compare_digest(API_KEY, OUR_API_KEY):
         return JSONResponse(
             status_code=403,

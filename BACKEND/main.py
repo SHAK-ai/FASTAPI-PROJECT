@@ -5,8 +5,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from core.database.sqlite import init_database
 from fastapi.middleware.cors import CORSMiddleware
-
-
+from modules.ai_agent import api_authenticate_key
 
 
 
